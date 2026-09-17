@@ -7,9 +7,7 @@
   <link rel="icon" href="logo.png" type="image/png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" />
-const API = window.location.hostname === 'localhost' 
-    ? 'http://localhost:3001/api' 
-    : 'https://nava-backend-8t90.onrender.com/api';
+const API = '/api';
   <script>
     tailwind.config = {
       theme: {
@@ -380,7 +378,7 @@ const API = window.location.hostname === 'localhost'
 <div id="toast" class="fixed top-20 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-xl glass-strong text-sm hidden"></div>
 
 <script>
-const API = 'http://localhost:3001/api';
+const API = '/api';
 let token = localStorage.getItem('nava_token');
 let currentUser = JSON.parse(localStorage.getItem('nava_user') || 'null');
 let songs = [], filteredSongs = [], genres = [];
