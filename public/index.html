@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
@@ -7,16 +7,16 @@
   <link rel="icon" href="logo.png" type="image/png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" />
-   <script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: { primary: { 400: '#a78bfa', 500: '#8b5cf6', 600: '#7c3aed', 700: '#6d28d9' } },
-        fontFamily: { vazir: ['Vazirmatn', 'sans-serif'] }
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { primary: { 400:'#a78bfa', 500:'#8b5cf6', 600:'#7c3aed', 700:'#6d28d9' } },
+          fontFamily: { vazir: ['Vazirmatn', 'sans-serif'] }
+        }
       }
     }
-  }
-</script>
+  </script>
   <style>
     * { font-family: 'Vazirmatn', sans-serif; }
     :root, [data-theme="dark"] {
@@ -93,9 +93,7 @@
       <p class="mb-6" style="color:var(--muted)">جایی برای تمام آهنگ‌ها</p>
       <button onclick="showPage('songs')" class="px-6 py-3 rounded-full bg-accent text-white">شروع گوش دادن</button>
     </div>
-
     <div class="mb-10" id="smart-playlist"></div>
-
     <div class="mb-10">
       <div class="flex justify-between items-center mb-4">
         <h2 class="text-xl font-bold">امروز گوش دادی</h2>
@@ -105,12 +103,10 @@
         <p class="text-sm" style="color:var(--muted)">هنوز امروز آهنگی گوش نداده‌اید</p>
       </div>
     </div>
-
     <div class="mb-10" id="recent-section" style="display:none">
       <h2 class="text-xl font-bold mb-4">اخیراً پخش‌شده</h2>
       <div id="recent-songs" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"></div>
     </div>
-
     <div class="mb-10">
       <div class="flex justify-between items-center mb-4">
         <h2 class="text-xl font-bold">تازه‌ها</h2>
@@ -118,12 +114,10 @@
       </div>
       <div id="home-songs" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"></div>
     </div>
-
     <div class="mb-10">
       <h2 class="text-xl font-bold mb-4">دسته‌بندی‌ها</h2>
       <div id="home-genres" class="flex flex-wrap gap-3"></div>
     </div>
-
     <div class="mb-10">
       <h2 class="text-xl font-bold mb-4">محبوب‌ترین‌ها</h2>
       <div id="popular-songs" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"></div>
@@ -316,7 +310,6 @@
   <div id="queue-list" class="overflow-y-auto max-h-80 p-2"></div>
 </div>
 
-<!-- PLAYER -->
 <div id="player-bar" class="fixed bottom-0 right-0 left-0 z-50 border-t" style="background:var(--player);border-color:var(--border);backdrop-filter:blur(24px)">
   <div class="px-4 pt-2"><input type="range" id="progress" min="0" max="100" value="0" class="w-full" oninput="seek(this.value)"></div>
   <div class="max-w-6xl mx-auto px-3 py-2 flex items-center gap-2 sm:gap-3">
@@ -330,7 +323,7 @@
       </div>
     </div>
     <div class="flex items-center justify-center gap-1 flex-1 flex-wrap">
-      <button onclick="toggleShuffle()" id="shuffle-btn" class="p-2" style="color:var(--muted)" title="تصادفی">🔀</button>
+      <button onclick="toggleShuffle()" id="shuffle-btn" class="p-2" style="color:var(--muted)">🔀</button>
       <button onclick="prevSong()" class="p-2">⏮</button>
       <button onclick="togglePlay()" class="w-11 h-11 rounded-full bg-white text-gray-900 flex items-center justify-center shadow-lg">
         <span id="play-icon">▶</span>
@@ -338,8 +331,7 @@
       </button>
       <button onclick="nextSongWithCrossfade()" class="p-2">⏭</button>
       <button onclick="toggleRepeat()" id="repeat-btn" class="p-2 relative" style="color:var(--muted)">
-        🔁
-        <span id="repeat-badge" class="absolute -top-1 -right-1 text-[10px] font-bold text-accent hidden">۱</span>
+        🔁<span id="repeat-badge" class="absolute -top-1 -right-1 text-[10px] font-bold text-accent hidden">۱</span>
       </button>
       <button onclick="cycleSpeed()" id="speed-btn" class="p-2 text-xs font-bold" style="color:var(--muted)">1x</button>
       <button onclick="toggleEqualizer()" class="p-2 text-xs font-bold" style="color:var(--muted)">EQ</button>
@@ -355,7 +347,6 @@
   </div>
 </div>
 
-<!-- حالت خودرو -->
 <div id="car-mode-panel" class="fixed inset-0 z-[70] hidden flex-col items-center justify-center bg-black p-6">
   <button onclick="toggleCarMode()" class="absolute top-5 left-5 text-white text-3xl">×</button>
   <div id="car-cover" class="w-72 h-72 rounded-3xl mb-8 shadow-2xl"></div>
@@ -377,7 +368,7 @@
 <div id="toast" class="fixed top-20 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-xl glass-strong text-sm hidden"></div>
 
 <script>
-const API = window.location.hostname === 'localhost' ? '/api' : '/api';
+const API = '/api';
 let token = localStorage.getItem('nava_token');
 let currentUser = JSON.parse(localStorage.getItem('nava_user') || 'null');
 let songs = [], filteredSongs = [], genres = [];
@@ -397,15 +388,21 @@ let analyser = null, visualizerRunning = false;
 let isCrossfading = false;
 let queueOrder = [];
 
+function mediaUrl(path) {
+  if (!path) return '';
+  if (path.startsWith('http')) return path;
+  if (path.startsWith('/')) return path;
+  if (path.startsWith('uploads/')) return '/' + path;
+  return '/uploads/' + path;
+}
+
 function getCleanList() {
   return filteredSongs.length ? filteredSongs : songs;
 }
 
-// پاک کردن تاریخچه گوش دادن
 function clearListeningHistory() {
   if (!confirm('تاریخچه گوش دادن پاک شود؟\n(امروز + اخیراً پخش‌شده)')) return;
-  const todayKey = 'nava_today_' + getTodayKey();
-  localStorage.removeItem(todayKey);
+  localStorage.removeItem('nava_today_' + getTodayKey());
   recent = [];
   localStorage.setItem('nava_recent', '[]');
   localStorage.removeItem('nava_resume');
@@ -414,7 +411,6 @@ function clearListeningHistory() {
   showToast('تاریخچه گوش دادن پاک شد');
 }
 
-// EQ
 function initEQ() {
   if (eqInitialized) return;
   try {
@@ -446,7 +442,6 @@ function toggleEqualizer() {
   if (audioCtx?.state === 'suspended') audioCtx.resume();
 }
 
-// Sleep + Focus + Car
 function toggleSleepTimer() {
   if (sleepTimer) { clearTimeout(sleepTimer); sleepTimer = null; showToast('تایمر خواب خاموش'); return; }
   const m = parseInt(prompt('چند دقیقه؟ (۱۵/۳۰/۴۵/۶۰)', '30'));
@@ -493,14 +488,13 @@ function updateCarModeUI() {
   document.getElementById('car-artist').textContent = currentSong.artist;
   const cover = document.getElementById('car-cover');
   if (currentSong.cover_path) {
-    cover.style.backgroundImage = `url(/${currentSong.cover_path})`;
+    cover.style.backgroundImage = `url(${mediaUrl(currentSong.cover_path)})`;
     cover.style.backgroundSize = 'cover';
   } else {
     cover.style.background = 'linear-gradient(135deg,#7c3aed,#c084fc)';
   }
 }
 
-// Visualizer
 function initVisualizer() {
   if (!eqInitialized) initEQ();
   if (!audioCtx || analyser) return;
@@ -537,7 +531,6 @@ function startVisualizer() {
 }
 function stopVisualizer() { visualizerRunning = false; document.getElementById('visualizer')?.classList.add('hidden'); }
 
-// Crossfade
 async function nextSongWithCrossfade() {
   if (isCrossfading || !currentSong) { nextSong(); return; }
   isCrossfading = true;
@@ -553,7 +546,7 @@ async function nextSongWithCrossfade() {
   } else currentIndex = pos === -1 ? 0 : (pos + 1) % list.length;
   const next = list[currentIndex];
   currentSong = next;
-  audio.src = '/' + next.audio_path;
+  audio.src = mediaUrl(next.audio_path);
   audio.volume = 0; audio.playbackRate = rates[rateIndex];
   try {
     await audio.play();
@@ -567,7 +560,6 @@ async function nextSongWithCrossfade() {
   audio.volume = orig; isCrossfading = false;
 }
 
-// Today History
 function getTodayKey() { const d = new Date(); return d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate(); }
 function addToTodayHistory(id) {
   const key = 'nava_today_' + getTodayKey();
@@ -587,18 +579,17 @@ function renderTodayHistory() {
     const s = songs.find(x => x.id === item.id);
     if (!s) return '';
     return `<div class="flex items-center gap-3 p-2 rounded-xl hover:bg-black/5 cursor-pointer" onclick="playSong(${s.id})">
-      <div class="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0" style="background:#2e2e3a">${s.cover_path ? `<img src="/${s.cover_path}" class="w-full h-full object-cover">` : ''}</div>
+      <div class="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0" style="background:#2e2e3a">${s.cover_path ? `<img src="${mediaUrl(s.cover_path)}" class="w-full h-full object-cover">` : ''}</div>
       <div class="min-w-0 flex-1"><p class="text-sm font-medium truncate">${s.title}</p><p class="text-xs" style="color:var(--muted)">${s.artist}</p></div>
       <span class="text-xs" style="color:var(--muted)">${item.time}</span></div>`;
   }).join('');
 }
 
-// Dynamic Color + Background
 function extractColorFromCover() {
   if (!currentSong?.cover_path) { resetAccentColor(); return; }
   const img = new Image();
   img.crossOrigin = 'anonymous';
-  img.src = '/' + currentSong.cover_path;
+  img.src = mediaUrl(currentSong.cover_path);
   img.onload = () => {
     try {
       const c = document.createElement('canvas');
@@ -630,14 +621,13 @@ function updatePlayerBackground() {
   const bar = document.getElementById('player-bar');
   if (!bar) return;
   if (currentSong?.cover_path) {
-    bar.style.backgroundImage = `linear-gradient(to top, rgba(10,10,15,0.88), rgba(10,10,15,0.7)), url(/${currentSong.cover_path})`;
+    bar.style.backgroundImage = `linear-gradient(to top, rgba(10,10,15,0.88), rgba(10,10,15,0.7)), url(${mediaUrl(currentSong.cover_path)})`;
   } else {
     bar.style.backgroundImage = '';
     bar.style.background = 'var(--player)';
   }
 }
 
-// Resume
 function savePlaybackState() {
   if (!currentSong) return;
   localStorage.setItem('nava_resume', JSON.stringify({ id: currentSong.id, time: audio.currentTime, updated: Date.now() }));
@@ -658,7 +648,6 @@ function tryResume() {
 }
 audio.addEventListener('timeupdate', () => { if (currentSong && isPlaying) savePlaybackState(); });
 
-// Stats
 function getStats() { return JSON.parse(localStorage.getItem('nava_stats') || '{"totalTime":0,"plays":0,"byGenre":{}}'); }
 function updateStats(seconds = 5) {
   const stats = getStats();
@@ -684,7 +673,6 @@ function renderPersonalStats() {
   </div>`;
 }
 
-// Smart Playlist
 function getDailySmartPlaylist() {
   const today = getTodayKey();
   const cacheKey = 'nava_smart_' + today;
@@ -717,7 +705,6 @@ function playSmartPlaylist() {
   if (list.length) playSong(list[0].id);
 }
 
-// Theme
 function initTheme() {
   const t = localStorage.getItem('nava_theme') || 'dark';
   document.documentElement.setAttribute('data-theme', t);
@@ -737,7 +724,6 @@ function toggleTheme() {
 }
 initTheme();
 
-// Offline + MediaSession + Keyboard
 window.addEventListener('online', () => document.getElementById('offline-badge').classList.add('hidden'));
 window.addEventListener('offline', () => document.getElementById('offline-badge').classList.remove('hidden'));
 if (!navigator.onLine) document.getElementById('offline-badge').classList.remove('hidden');
@@ -747,7 +733,7 @@ function updateMediaSession() {
   try {
     navigator.mediaSession.metadata = new MediaMetadata({
       title: currentSong.title, artist: currentSong.artist, album: currentSong.album || 'نوا',
-      artwork: currentSong.cover_path ? [{ src: '/' + currentSong.cover_path, sizes: '512x512' }] : [{ src: 'logo.png', sizes: '512x512' }]
+      artwork: currentSong.cover_path ? [{ src: mediaUrl(currentSong.cover_path), sizes: '512x512' }] : [{ src: 'logo.png', sizes: '512x512' }]
     });
     navigator.mediaSession.setActionHandler('play', () => audio.play());
     navigator.mediaSession.setActionHandler('pause', () => audio.pause());
@@ -770,7 +756,6 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// Direct Link + Search History
 function getSongLink(id) { return `${location.origin}${location.pathname}?song=${id}`; }
 function shareSongLink(id) {
   const link = getSongLink(id || currentSong?.id);
@@ -806,7 +791,6 @@ function renderSearchHistory() {
   ).join('')}</div>`;
 }
 
-// Auth
 function openAuth() { document.getElementById('auth-modal').classList.remove('hidden'); document.getElementById('auth-modal').classList.add('flex'); }
 function closeAuth() { document.getElementById('auth-modal').classList.add('hidden'); document.getElementById('auth-modal').classList.remove('flex'); }
 function switchAuth(t) { document.getElementById('login-form').classList.toggle('hidden', t !== 'login'); document.getElementById('register-form').classList.toggle('hidden', t !== 'register'); }
@@ -854,7 +838,6 @@ function updateUI() {
   }
 }
 
-// Data
 async function loadGenres() {
   try {
     const res = await fetch(API + '/genres');
@@ -929,9 +912,8 @@ async function deleteCurrentPlaylist() { if (!confirm('حذف شود؟')) return
 async function removeFromPlaylist(songId) { await fetch(API + '/playlists/' + currentPlaylistId + '/songs/' + songId, { method: 'DELETE', headers: { Authorization: 'Bearer ' + token } }); openPlaylist(currentPlaylistId); showToast('حذف شد'); }
 function loadAll() { loadGenres(); loadSongs(); loadPlaylists(); }
 
-// Render
 function songCard(s) {
-  const cover = s.cover_path ? `/${s.cover_path}` : '';
+  const cover = s.cover_path ? mediaUrl(s.cover_path) : '';
   const isLiked = liked.has(s.id);
   return `<div class="glass rounded-2xl p-3 album-card relative group">
     <div class="w-full aspect-square rounded-xl mb-2 overflow-hidden cursor-pointer" style="background:#2e2e3a" onclick="playSong(${s.id})">${cover ? `<img src="${cover}" class="w-full h-full object-cover">` : ''}</div>
@@ -1018,7 +1000,7 @@ function openSongDetail(id) {
   document.getElementById('detail-tags').innerHTML = (song.tags || []).map(t => `<span class="px-2 py-1 rounded-full text-xs glass">${t}</span>`).join('');
   const cover = document.getElementById('detail-cover');
   if (song.cover_path) {
-    cover.style.backgroundImage = `url(/${song.cover_path})`;
+    cover.style.backgroundImage = `url(${mediaUrl(song.cover_path)})`;
     cover.style.backgroundSize = 'cover';
   } else {
     cover.style.backgroundImage = '';
@@ -1035,7 +1017,7 @@ function playSong(id) {
   if (index === -1) return;
   currentIndex = index;
   currentSong = list[index];
-  audio.src = '/' + currentSong.audio_path;
+  audio.src = mediaUrl(currentSong.audio_path);
   audio.playbackRate = rates[rateIndex];
   audio.play().catch(() => showToast('پخش ممکن نیست'));
   isPlaying = true;
@@ -1102,7 +1084,7 @@ function updatePlayerUI() {
   document.getElementById('player-title').textContent = currentSong.title;
   document.getElementById('player-artist').textContent = currentSong.artist;
   const img = document.getElementById('player-cover-img');
-  if (currentSong.cover_path) { img.src = '/' + currentSong.cover_path; img.classList.remove('hidden'); }
+  if (currentSong.cover_path) { img.src = mediaUrl(currentSong.cover_path); img.classList.remove('hidden'); }
   else img.classList.add('hidden');
   updatePlayIcon();
   if (carMode) updateCarModeUI();
@@ -1291,4 +1273,3 @@ loadAll();
 </script>
 </body>
 </html>
-
