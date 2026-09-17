@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fa" dir="rtl" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
@@ -377,7 +377,7 @@
 <div id="toast" class="fixed top-20 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-xl glass-strong text-sm hidden"></div>
 
 <script>
-const API = '/api';
+const API = window.location.hostname === 'localhost' ? '/api' : '/api';
 let token = localStorage.getItem('nava_token');
 let currentUser = JSON.parse(localStorage.getItem('nava_user') || 'null');
 let songs = [], filteredSongs = [], genres = [];
@@ -493,7 +493,7 @@ function updateCarModeUI() {
   document.getElementById('car-artist').textContent = currentSong.artist;
   const cover = document.getElementById('car-cover');
   if (currentSong.cover_path) {
-    cover.style.backgroundImage = `url(http://localhost:3001/${currentSong.cover_path})`;
+    cover.style.backgroundImage = `url(/${currentSong.cover_path})`;
     cover.style.backgroundSize = 'cover';
   } else {
     cover.style.background = 'linear-gradient(135deg,#7c3aed,#c084fc)';
@@ -553,7 +553,7 @@ async function nextSongWithCrossfade() {
   } else currentIndex = pos === -1 ? 0 : (pos + 1) % list.length;
   const next = list[currentIndex];
   currentSong = next;
-  audio.src = 'http://localhost:3001/' + next.audio_path;
+  audio.src = '/' + next.audio_path;
   audio.volume = 0; audio.playbackRate = rates[rateIndex];
   try {
     await audio.play();
@@ -587,7 +587,7 @@ function renderTodayHistory() {
     const s = songs.find(x => x.id === item.id);
     if (!s) return '';
     return `<div class="flex items-center gap-3 p-2 rounded-xl hover:bg-black/5 cursor-pointer" onclick="playSong(${s.id})">
-      <div class="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0" style="background:#2e2e3a">${s.cover_path ? `<img src="http://localhost:3001/${s.cover_path}" class="w-full h-full object-cover">` : ''}</div>
+      <div class="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0" style="background:#2e2e3a">${s.cover_path ? `<img src="/${s.cover_path}" class="w-full h-full object-cover">` : ''}</div>
       <div class="min-w-0 flex-1"><p class="text-sm font-medium truncate">${s.title}</p><p class="text-xs" style="color:var(--muted)">${s.artist}</p></div>
       <span class="text-xs" style="color:var(--muted)">${item.time}</span></div>`;
   }).join('');
@@ -598,7 +598,7 @@ function extractColorFromCover() {
   if (!currentSong?.cover_path) { resetAccentColor(); return; }
   const img = new Image();
   img.crossOrigin = 'anonymous';
-  img.src = 'http://localhost:3001/' + currentSong.cover_path;
+  img.src = '/' + currentSong.cover_path;
   img.onload = () => {
     try {
       const c = document.createElement('canvas');
@@ -630,7 +630,7 @@ function updatePlayerBackground() {
   const bar = document.getElementById('player-bar');
   if (!bar) return;
   if (currentSong?.cover_path) {
-    bar.style.backgroundImage = `linear-gradient(to top, rgba(10,10,15,0.88), rgba(10,10,15,0.7)), url(http://localhost:3001/${currentSong.cover_path})`;
+    bar.style.backgroundImage = `linear-gradient(to top, rgba(10,10,15,0.88), rgba(10,10,15,0.7)), url(/${currentSong.cover_path})`;
   } else {
     bar.style.backgroundImage = '';
     bar.style.background = 'var(--player)';
@@ -747,7 +747,7 @@ function updateMediaSession() {
   try {
     navigator.mediaSession.metadata = new MediaMetadata({
       title: currentSong.title, artist: currentSong.artist, album: currentSong.album || 'نوا',
-      artwork: currentSong.cover_path ? [{ src: 'http://localhost:3001/' + currentSong.cover_path, sizes: '512x512' }] : [{ src: 'logo.png', sizes: '512x512' }]
+      artwork: currentSong.cover_path ? [{ src: '/' + currentSong.cover_path, sizes: '512x512' }] : [{ src: 'logo.png', sizes: '512x512' }]
     });
     navigator.mediaSession.setActionHandler('play', () => audio.play());
     navigator.mediaSession.setActionHandler('pause', () => audio.pause());
@@ -931,7 +931,7 @@ function loadAll() { loadGenres(); loadSongs(); loadPlaylists(); }
 
 // Render
 function songCard(s) {
-  const cover = s.cover_path ? `http://localhost:3001/${s.cover_path}` : '';
+  const cover = s.cover_path ? `/${s.cover_path}` : '';
   const isLiked = liked.has(s.id);
   return `<div class="glass rounded-2xl p-3 album-card relative group">
     <div class="w-full aspect-square rounded-xl mb-2 overflow-hidden cursor-pointer" style="background:#2e2e3a" onclick="playSong(${s.id})">${cover ? `<img src="${cover}" class="w-full h-full object-cover">` : ''}</div>
@@ -1018,7 +1018,7 @@ function openSongDetail(id) {
   document.getElementById('detail-tags').innerHTML = (song.tags || []).map(t => `<span class="px-2 py-1 rounded-full text-xs glass">${t}</span>`).join('');
   const cover = document.getElementById('detail-cover');
   if (song.cover_path) {
-    cover.style.backgroundImage = `url(http://localhost:3001/${song.cover_path})`;
+    cover.style.backgroundImage = `url(/${song.cover_path})`;
     cover.style.backgroundSize = 'cover';
   } else {
     cover.style.backgroundImage = '';
@@ -1035,7 +1035,7 @@ function playSong(id) {
   if (index === -1) return;
   currentIndex = index;
   currentSong = list[index];
-  audio.src = 'http://localhost:3001/' + currentSong.audio_path;
+  audio.src = '/' + currentSong.audio_path;
   audio.playbackRate = rates[rateIndex];
   audio.play().catch(() => showToast('پخش ممکن نیست'));
   isPlaying = true;
@@ -1102,7 +1102,7 @@ function updatePlayerUI() {
   document.getElementById('player-title').textContent = currentSong.title;
   document.getElementById('player-artist').textContent = currentSong.artist;
   const img = document.getElementById('player-cover-img');
-  if (currentSong.cover_path) { img.src = 'http://localhost:3001/' + currentSong.cover_path; img.classList.remove('hidden'); }
+  if (currentSong.cover_path) { img.src = '/' + currentSong.cover_path; img.classList.remove('hidden'); }
   else img.classList.add('hidden');
   updatePlayIcon();
   if (carMode) updateCarModeUI();
@@ -1291,3 +1291,4 @@ loadAll();
 </script>
 </body>
 </html>
+
