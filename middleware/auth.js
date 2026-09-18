@@ -2,24 +2,36 @@ const jwt = require('jsonwebtoken');
 
 function auth(req, res, next) {
   const header = req.headers.authorization;
+
   if (!header || !header.startsWith('Bearer ')) {
-    return res.status(401).json({ error: 'توکن وجود ندارد' });
+    return res.status(401).json({
+      error: 'توکن وجود ندارد'
+    });
   }
 
   try {
     const token = header.split(' ')[1];
+
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded; // { id, username, isAdmin }
+
+    // نمونه: { id, username, isAdmin }
+    req.user = decoded;
+
     next();
-  } catch {
-    return res.status(401).json({ error: 'توکن نامعتبر است' });
+  } catch (error) {
+    return res.status(401).json({
+      error: 'توکن نامعتبر یا منقضی شده است'
+    });
   }
 }
 
 function adminOnly(req, res, next) {
-  if (!req.user?.isAdmin) {
-    return res.status(403).json({ error: 'دسترسی فقط برای ادمین' });
+  if (!req.user || !req.user.isAdmin) {
+    return res.status(403).json({
+      error: 'دسترسی فقط برای ادمین است'
+    });
   }
+
   next();
 }
 
