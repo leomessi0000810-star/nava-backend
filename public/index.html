@@ -150,7 +150,7 @@
   </section>
 
   <section id="page-playlist-detail" class="page">
-    <button onclick="showPage('playlists')" class="text-sm text-accent mb-4">← بازگشت</button>
+    <button onclick="showPage('playlists')" class="text-sm text-accent mb-4 flex items-center gap-2"><svg class="w-5 h-5" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg><span>بازگشت</span></button>
     <div class="flex justify-between items-center mb-6">
       <h1 id="pl-detail-title" class="text-2xl font-bold">پلی‌لیست</h1>
       <button onclick="deleteCurrentPlaylist()" class="text-sm text-red-400">حذف پلی‌لیست</button>
@@ -159,7 +159,7 @@
   </section>
 
   <section id="page-song-detail" class="page">
-    <button onclick="showPage('songs')" class="text-sm text-accent mb-4">← بازگشت</button>
+    <button onclick="showPage('songs')" class="text-sm text-accent mb-4 flex items-center gap-2"><svg class="w-5 h-5" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg><span>بازگشت</span></button>
     <div class="glass rounded-3xl overflow-hidden mb-6">
       <div class="flex flex-col md:flex-row">
         <div id="detail-cover" class="w-full md:w-64 h-64 flex-shrink-0" style="background:#2e2e3a"></div>
@@ -171,8 +171,8 @@
           <p id="detail-plays" class="text-xs mb-4" style="color:var(--muted)"></p>
           <div id="detail-tags" class="flex flex-wrap gap-2 mb-4"></div>
           <div class="flex flex-wrap gap-3">
-            <button onclick="playCurrentDetail()" class="px-6 py-2.5 rounded-full bg-accent text-white">▶ پخش</button>
-            <button onclick="toggleLike(currentDetailSong?.id)" id="detail-like-btn" class="px-4 py-2.5 rounded-full glass">♥</button>
+            <button onclick="playCurrentDetail()" class="px-6 py-2.5 rounded-full bg-accent text-white flex items-center gap-2"><svg class="w-5 h-5" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3l14 9-14 9V3z"/></svg><span>پخش</span></button>
+            <button onclick="toggleLike(currentDetailSong?.id)" id="detail-like-btn" class="px-4 py-2.5 rounded-full glass" aria-label="لایک / حذف لایک" title="لایک / حذف لایک"><svg class="w-5 h-5" viewBox="0 0 24 24" stroke="currentColor" fill="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg></button>
             <button onclick="openAddToPlaylist(currentDetailSong?.id)" class="px-4 py-2.5 rounded-full glass">+</button>
             <button onclick="shareSongLink(currentDetailSong?.id)" class="px-4 py-2.5 rounded-full glass">اشتراک لینک</button>
           </div>
@@ -242,7 +242,7 @@
 <!-- Modals -->
 <div id="auth-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70">
   <div class="glass-strong rounded-3xl p-8 w-full max-w-md mx-4 relative">
-    <button onclick="closeAuth()" class="absolute left-4 top-4 text-xl" style="color:var(--muted)">×</button>
+    <button onclick="closeAuth()" class="absolute left-4 top-4 text-xl" style="color:var(--muted)" aria-label="بستن" title="بستن"><svg class="w-5 h-5" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
     <div class="flex gap-4 mb-6 border-b pb-3" style="border-color:var(--border)">
       <button onclick="switchAuth('login')" class="flex-1 py-2 text-accent border-b-2" style="border-color:var(--accent)">ورود</button>
       <button onclick="switchAuth('register')" class="flex-1 py-2" style="color:var(--muted)">ثبت‌نام</button>
@@ -290,7 +290,7 @@
 <div id="eq-panel" class="fixed bottom-28 right-4 w-72 glass-strong rounded-2xl p-4 z-40 hidden">
   <div class="flex justify-between items-center mb-3">
     <h3 class="font-bold text-sm">اکولایزر</h3>
-    <button onclick="toggleEqualizer()">×</button>
+    <button onclick="toggleEqualizer()" aria-label="بستن" title="بستن"><svg class="w-5 h-5" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
   </div>
   <div class="grid grid-cols-2 gap-2 text-sm">
     <button onclick="setEQ('normal')" class="py-2 rounded-xl glass">عادی</button>
@@ -305,7 +305,7 @@
 <div id="queue-panel" class="fixed bottom-28 left-4 w-80 max-h-96 glass-strong rounded-2xl z-40 hidden overflow-hidden">
   <div class="p-4 border-b flex justify-between items-center" style="border-color:var(--border)">
     <h3 class="font-bold text-sm">صف پخش</h3>
-    <button onclick="toggleQueue()">×</button>
+    <button onclick="toggleQueue()" aria-label="بستن" title="بستن"><svg class="w-5 h-5" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
   </div>
   <div id="queue-list" class="overflow-y-auto max-h-80 p-2"></div>
 </div>
@@ -323,42 +323,42 @@
       </div>
     </div>
     <div class="flex items-center justify-center gap-1 flex-1 flex-wrap">
-      <button onclick="toggleShuffle()" id="shuffle-btn" class="p-2" style="color:var(--muted)">🔀</button>
-      <button onclick="prevSong()" class="p-2">⏮</button>
+      <button onclick="toggleShuffle()" id="shuffle-btn" class="p-2" style="color:var(--muted)" aria-label="پخش تصادفی" title="پخش تصادفی"><svg class="w-5 h-5" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3h5v5"/><path d="M4 20L21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg></button>
+      <button onclick="prevSong()" class="p-2" aria-label="آهنگ قبلی" title="آهنگ قبلی"><svg class="w-5 h-5" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 20L9 12l10-8v16z"/><path d="M5 19V5"/></svg></button>
       <button onclick="togglePlay()" class="w-11 h-11 rounded-full bg-white text-gray-900 flex items-center justify-center shadow-lg">
-        <span id="play-icon">▶</span>
-        <span id="pause-icon" class="hidden">⏸</span>
+        <span id="play-icon"><svg class="w-5 h-5" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3l14 9-14 9V3z"/></svg></span>
+        <span id="pause-icon" class="hidden"><svg class="w-5 h-5" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5v14"/><path d="M15 5v14"/></svg></span>
       </button>
-      <button onclick="nextSongWithCrossfade()" class="p-2">⏭</button>
+      <button onclick="nextSongWithCrossfade()" class="p-2" aria-label="آهنگ بعدی" title="آهنگ بعدی"><svg class="w-5 h-5" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4l10 8-10 8V4z"/><path d="M19 5v14"/></svg></button>
       <button onclick="toggleRepeat()" id="repeat-btn" class="p-2 relative" style="color:var(--muted)">
-        🔁<span id="repeat-badge" class="absolute -top-1 -right-1 text-[10px] font-bold text-accent hidden">۱</span>
+        <svg class="w-5 h-5" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 014-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 01-4 4H3"/></svg><span id="repeat-badge" class="absolute -top-1 -right-1 text-[10px] font-bold text-accent hidden">۱</span>
       </button>
       <button onclick="cycleSpeed()" id="speed-btn" class="p-2 text-xs font-bold" style="color:var(--muted)">1x</button>
       <button onclick="toggleEqualizer()" class="p-2 text-xs font-bold" style="color:var(--muted)">EQ</button>
-      <button onclick="toggleSleepTimer()" class="p-2 text-xs" style="color:var(--muted)">⏱</button>
-      <button onclick="toggleFocusMode()" class="p-2 text-xs" style="color:var(--muted)">⛶</button>
-      <button onclick="toggleCarMode()" class="p-2 text-xs" style="color:var(--muted)">🚗</button>
+      <button onclick="toggleSleepTimer()" class="p-2 text-xs" style="color:var(--muted)" aria-label="تایمر خواب" title="تایمر خواب"><svg class="w-5 h-5" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></button>
+      <button onclick="toggleFocusMode()" class="p-2 text-xs" style="color:var(--muted)" aria-label="حالت تمرکز" title="حالت تمرکز"><svg class="w-5 h-5" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 00-2 2v3"/><path d="M21 8V5a2 2 0 00-2-2h-3"/><path d="M16 21h3a2 2 0 002-2v-3"/><path d="M3 16v3a2 2 0 002 2h3"/></svg></button>
+      <button onclick="toggleCarMode()" class="p-2 text-xs" style="color:var(--muted)" aria-label="حالت خودرو" title="حالت خودرو"><svg class="w-5 h-5" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 002 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></button>
     </div>
     <div class="hidden md:flex items-center gap-2 w-48 justify-end">
       <span id="time-display" class="text-xs" style="color:var(--muted)">۰:۰۰ / ۰:۰۰</span>
-      <button onclick="toggleQueue()" class="p-1.5" style="color:var(--muted)">☰</button>
+      <button onclick="toggleQueue()" class="p-1.5" style="color:var(--muted)" aria-label="صف پخش" title="صف پخش"><svg class="w-5 h-5" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/></svg></button>
       <input type="range" id="volume" min="0" max="100" value="80" class="w-16" oninput="setVolume(this.value)">
     </div>
   </div>
 </div>
 
 <div id="car-mode-panel" class="fixed inset-0 z-[70] hidden flex-col items-center justify-center bg-black p-6">
-  <button onclick="toggleCarMode()" class="absolute top-5 left-5 text-white text-3xl">×</button>
+  <button onclick="toggleCarMode()" class="absolute top-5 left-5 text-white text-3xl" aria-label="بستن" title="بستن"><svg class="w-5 h-5" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
   <div id="car-cover" class="w-72 h-72 rounded-3xl mb-8 shadow-2xl"></div>
   <h2 id="car-title" class="text-2xl font-bold text-white text-center mb-2">عنوان آهنگ</h2>
   <p id="car-artist" class="text-lg text-gray-400 mb-12">هنرمند</p>
   <div class="flex items-center gap-10">
-    <button onclick="prevSong()" class="w-16 h-16 rounded-full bg-white/15 text-white text-2xl flex items-center justify-center">⏮</button>
-    <button onclick="togglePlay()" class="w-20 h-20 rounded-full bg-white text-black text-3xl flex items-center justify-center shadow-xl">▶</button>
-    <button onclick="nextSongWithCrossfade()" class="w-16 h-16 rounded-full bg-white/15 text-white text-2xl flex items-center justify-center">⏭</button>
+    <button onclick="prevSong()" class="w-16 h-16 rounded-full bg-white/15 text-white text-2xl flex items-center justify-center" aria-label="آهنگ قبلی" title="آهنگ قبلی"><svg class="w-5 h-5" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 20L9 12l10-8v16z"/><path d="M5 19V5"/></svg></button>
+    <button onclick="togglePlay()" class="w-20 h-20 rounded-full bg-white text-black text-3xl flex items-center justify-center shadow-xl" aria-label="پخش / توقف" title="پخش / توقف"><svg class="w-5 h-5" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3l14 9-14 9V3z"/></svg></button>
+    <button onclick="nextSongWithCrossfade()" class="w-16 h-16 rounded-full bg-white/15 text-white text-2xl flex items-center justify-center" aria-label="آهنگ بعدی" title="آهنگ بعدی"><svg class="w-5 h-5" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4l10 8-10 8V4z"/><path d="M19 5v14"/></svg></button>
   </div>
   <div class="mt-12 flex gap-4">
-    <button onclick="toggleLike()" class="px-6 py-3 rounded-full bg-white/10 text-white">♥</button>
+    <button onclick="toggleLike()" class="px-6 py-3 rounded-full bg-white/10 text-white" aria-label="لایک / حذف لایک" title="لایک / حذف لایک"><svg class="w-5 h-5" viewBox="0 0 24 24" stroke="currentColor" fill="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg></button>
     <button onclick="toggleCarMode()" class="px-6 py-3 rounded-full bg-white/10 text-white">خروج</button>
   </div>
 </div>
@@ -921,7 +921,7 @@ function songCard(s) {
     <p class="text-xs truncate" style="color:var(--muted)">${s.artist}</p>
     <div class="absolute top-2 left-2 flex gap-1 opacity-0 group-hover:opacity-100 transition">
       ${currentUser ? `<button onclick="openAddToPlaylist(${s.id})" class="w-8 h-8 rounded-full bg-black/60 hover:bg-primary-600 flex items-center justify-center text-white">+</button>` : ''}
-      <button onclick="toggleLike(${s.id})" class="w-8 h-8 rounded-full bg-black/60 hover:bg-pink-600 flex items-center justify-center ${isLiked ? 'liked' : 'text-white'}">♥</button>
+      <button onclick="toggleLike(${s.id})" class="w-8 h-8 rounded-full bg-black/60 hover:bg-pink-600 flex items-center justify-center ${isLiked ? 'liked' : 'text-white'}" aria-label="لایک / حذف لایک" title="لایک / حذف لایک"><svg class="w-5 h-5" viewBox="0 0 24 24" stroke="currentColor" fill="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg></button>
     </div>
   </div>`;
 }
@@ -944,7 +944,7 @@ function renderSongsList() {
     return `<div class="flex items-center gap-3 px-4 py-3 border-b group" style="border-color:var(--border)">
       <span class="w-6 text-sm" style="color:var(--muted)">${i+1}</span>
       <div class="flex-1 min-w-0 cursor-pointer" onclick="playSong(${s.id})"><p class="text-sm font-medium truncate">${s.title}</p><p class="text-xs" style="color:var(--muted)">${s.artist}${s.genre ? ' • ' + s.genre : ''}${s.play_count ? ` • ${s.play_count} پخش` : ''}</p></div>
-      <button onclick="toggleLike(${s.id})" class="p-1.5 ${isLiked ? 'liked' : ''}" style="color:var(--muted)">♥</button>
+      <button onclick="toggleLike(${s.id})" class="p-1.5 ${isLiked ? 'liked' : ''}" style="color:var(--muted)" aria-label="لایک / حذف لایک" title="لایک / حذف لایک"><svg class="w-5 h-5" viewBox="0 0 24 24" stroke="currentColor" fill="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg></button>
       ${currentUser ? `<button onclick="openAddToPlaylist(${s.id})" class="p-1.5" style="color:var(--muted)">+</button>` : ''}
     </div>`;
   }).join('');
